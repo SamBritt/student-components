@@ -88,13 +88,23 @@ const container = document.querySelector('#container');
 
 //After refactoring
 const createStudentComponent = (obj) => {
-    return `
-        <div class = "student ${obj}">
-            <h1 class = "xx-large">${obj.name}</h1>
-            <section class = "bordered dashed section--padded">${obj.subject}</section>
-            <aside class = "pushRight">${obj.info}</aside>
-        </div>
-    `
+    if (obj.score >= 60) {
+        return `
+            <div class = "student ${obj}">
+                <h1 class = "xx-large passing">${obj.name}</h1>
+                <section class = "bordered dashed section--padded">${obj.subject}</section>
+                <aside class = "pushRight">${obj.info}</aside>
+            </div>
+        `
+    } else {
+        return  `
+            <div class = "student ${obj}">
+                <h1 class = "xx-large failing">${obj.name}</h1>
+                <section class = "bordered dashed section--padded">${obj.subject}</section>
+                <aside class = "pushRight">${obj.info}</aside>
+            </div>
+        `
+    }
 }
 
 // for (const student of students) {
@@ -108,12 +118,8 @@ const createStudentComponent = (obj) => {
 // }
 
 //After refactoring
-for (const student of students) {
+for (const x of students) {
     let studentComponent = "";
-    if (student.score >= 60) {
-        studentComponent += createStudentComponent(student);
-    } else {
-        studentComponent += createStudentComponent(student);
-    }
+    studentComponent += createStudentComponent(x);
     container.innerHTML += studentComponent;
 }
